@@ -54,11 +54,37 @@ def _append_jsonl(path: Path, records: list[dict[str, Any]]) -> None:
             fh.write(json.dumps(r, sort_keys=True) + "\n")
 
 
+def _sanitize_record(rec: dict[str, Any]) -> dict[str, Any]:
+    """Strip raw model turn outputs so public results JSONL never leaks frozen item answers."""
+    return {k: v for k, v in rec.items() if k != "turn_outputs"}
+
+
+def _merge_sanitized_jsonl(path: Path, records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    existing = _read_jsonl(path)
+    by_cid: dict[str, dict[str, Any]] = {}
+    for r in existing:
+        by_cid[str(r.get("conversation_id") or id(r))] = _sanitize_record(r)
+    for r in records:
+        by_cid[str(r.get("conversation_id") or id(r))] = _sanitize_record(r)
+    merged = sorted(
+        by_cid.values(),
+        key=lambda r: (str(r.get("day", "")), str(r.get("arm", "")), str(r.get("agent_name", "")), str(r.get("item_id", ""))),
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as fh:
+        for r in merged:
+            fh.write(json.dumps(r, sort_keys=True) + "\n")
+    return merged
+
+
 def _write_results_tables(
     baseline_records: list[dict[str, Any]],
     validation_records: list[dict[str, Any]] | None = None,
 ) -> None:
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    baseline_records = _merge_sanitized_jsonl(RESULTS_DIR / "sample_metrics.jsonl", baseline_records)
+    if validation_records:
+        validation_records = _merge_sanitized_jsonl(RESULTS_DIR / "validation_metrics.jsonl", validation_records)
     daily_csv = RESULTS_DIR / "daily_summary.csv"
     grouped: dict[tuple[str, str, str, str, str], list[dict[str, Any]]] = {}
     for r in baseline_records:
@@ -470,8 +496,12 @@ def cmd_validate(args: argparse.Namespace) -> None:
 
 
 def cmd_plot(args: argparse.Namespace) -> None:
-    series_records = _read_jsonl(Path(args.series_log))
-    val_records = _read_jsonl(Path(args.validation_log)) if args.validation_log else []
+    series_records = _read_jsonl(Path(args.series_log)) or _read_jsonl(RESULTS_DIR / "sample_metrics.jsonl")
+    val_records = (
+        _read_jsonl(Path(args.validation_log))
+        if args.validation_log and Path(args.validation_log).is_file()
+        else _read_jsonl(RESULTS_DIR / "validation_metrics.jsonl")
+    )
     _write_results_tables(series_records, val_records or None)
     paths = render_all_media(series_records, val_records or None, media_dir=MEDIA_DIR)
     print("Rendered SVGs:", [str(p.relative_to(MEDIA_DIR.parent)) for p in paths])
