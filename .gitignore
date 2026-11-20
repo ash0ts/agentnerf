@@ -1,0 +1,23 @@
+# Secrets and local environment
+.env
+.*.env
+*.env
+!.env.example
+.panel_secret
+
+# Python & tooling
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+
+# Raw append-only run logs and W&B local cache
+logs/*.jsonl
+!logs/.gitkeep
+wandb/
+out/
+.DS_Store

@@ -1,0 +1,44 @@
+name: Daily Agent Lens Drift Series
+
+on:
+  schedule:
+    - cron: "15 14 * * *"
+  workflow_dispatch:
+    inputs:
+      window:
+        description: "Window label (e.g. baseline, w01, w02)"
+        required: false
+        default: "daily"
+
+jobs:
+  daily-probe:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
+      AGENTNERF_PANEL_SECRET: ${{ secrets.AGENTNERF_PANEL_SECRET }}
+      AGENTNERF_PROJECT: ${{ vars.AGENTNERF_PROJECT || 'wandb/agentnerf-v1' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --dev
+      - name: Run daily frozen panel + export traces to CoreWeave Agent Lens & Forge EvalTable
+        run: |
+          uv run agentnerf run \
+            --panel frozen \
+            --window "${{ inputs.window || 'daily' }}" \
+            --items-per-family 4 \
+            --control-subset \
+            --publish-forge
+      - name: Commit updated summary CSVs & SVGs
+        run: |
+          if [ -n "$(git status --porcelain results/ media/)" ]; then
+            git config user.name "agentnerf-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add results/ media/
+            git commit -m "chore(series): daily Agent Lens drift update $(date -u +%Y-%m-%d)"
+            git push
+          fi

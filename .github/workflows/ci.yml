@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --dev
+      - run: uv run ruff check src tests
+      - run: uv run pytest -q
+      - name: Verify harness.lock matches probe & prompt content hash
+        run: |
+          uv run python -c '
+          from agentnerf.common import HARNESS_LOCK, harness_content_hash
+          want = HARNESS_LOCK.read_text().strip()
+          have = harness_content_hash()
+          assert want == have, f"harness.lock mismatch: {want} != {have}"
+          print("harness.lock verified:", have)
+          '

@@ -1,0 +1,207 @@
+{
+  "project": "wandb/agentnerf-v1",
+  "agent_lens_url": "https://forge.coreweave.com/agent-lens/wandb/agentnerf-v1",
+  "agents_count": 6,
+  "agents": [
+    {
+      "agent_name": "gpt-5.5",
+      "invocation_count": 48,
+      "span_count": 48,
+      "error_count": 0,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "total_cost_usd": 5.272621869404247,
+      "versions": [
+        {
+          "agent_version": "validation-low-v1",
+          "invocation_count": 24,
+          "span_count": 24,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": 1.8410689546199137
+        },
+        {
+          "agent_version": "baseline-high-v1",
+          "invocation_count": 24,
+          "span_count": 24,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": 3.4315529147843336
+        }
+      ]
+    },
+    {
+      "agent_name": "claude-fable-5-2",
+      "invocation_count": 48,
+      "span_count": 48,
+      "error_count": 0,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "total_cost_usd": null,
+      "versions": [
+        {
+          "agent_version": "validation-low-v1",
+          "invocation_count": 24,
+          "span_count": 24,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": null
+        },
+        {
+          "agent_version": "baseline-high-v1",
+          "invocation_count": 24,
+          "span_count": 24,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": null
+        }
+      ]
+    },
+    {
+      "agent_name": "claude-sonnet-5-5",
+      "invocation_count": 48,
+      "span_count": 48,
+      "error_count": 0,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "total_cost_usd": 2.677917969632972,
+      "versions": [
+        {
+          "agent_version": "validation-low-v1",
+          "invocation_count": 24,
+          "span_count": 24,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": 1.2563439861628467
+        },
+        {
+          "agent_version": "baseline-high-v1",
+          "invocation_count": 24,
+          "span_count": 24,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": 1.4215739834701253
+        }
+      ]
+    },
+    {
+      "agent_name": "claude-opus-5-5",
+      "invocation_count": 48,
+      "span_count": 48,
+      "error_count": 0,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "total_cost_usd": 5.78605993051724,
+      "versions": [
+        {
+          "agent_version": "validation-low-v1",
+          "invocation_count": 24,
+          "span_count": 24,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": 2.546683971571383
+        },
+        {
+          "agent_version": "baseline-high-v1",
+          "invocation_count": 24,
+          "span_count": 24,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": 3.239375958945857
+        }
+      ]
+    },
+    {
+      "agent_name": "gpt-5.4",
+      "invocation_count": 12,
+      "span_count": 12,
+      "error_count": 0,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "total_cost_usd": 0.7310374819253411,
+      "versions": [
+        {
+          "agent_version": "baseline-medium-v1",
+          "invocation_count": 12,
+          "span_count": 12,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": 0.7310374819253411
+        }
+      ]
+    },
+    {
+      "agent_name": "claude-haiku-5-5",
+      "invocation_count": 12,
+      "span_count": 12,
+      "error_count": 0,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "total_cost_usd": 0.051705000239550714,
+      "versions": [
+        {
+          "agent_version": "baseline-medium-v1",
+          "invocation_count": 12,
+          "span_count": 12,
+          "error_count": 0,
+          "total_output_tokens": 0,
+          "total_cost_usd": 0.051705000239550714
+        }
+      ]
+    }
+  ],
+  "sample_conversations": [
+    {
+      "conversation_id": "48cb238c-8d0e-57df-ba60-cdbf5d608372",
+      "turns": 2,
+      "total_cost_usd": null,
+      "spans": 26,
+      "operations": {
+        "chat": 10,
+        "execute_tool": 14,
+        "invoke_agent": 2
+      },
+      "error_spans": 5,
+      "url": "https://forge.coreweave.com/agent-lens/wandb/agentnerf-v1/conversations/48cb238c-8d0e-57df-ba60-cdbf5d608372"
+    },
+    {
+      "conversation_id": "f374cc0f-b558-5bfa-8bf4-48b7ecd2bafa",
+      "turns": 1,
+      "total_cost_usd": null,
+      "spans": 13,
+      "operations": {
+        "chat": 4,
+        "execute_tool": 8,
+        "invoke_agent": 1
+      },
+      "error_spans": 0,
+      "url": "https://forge.coreweave.com/agent-lens/wandb/agentnerf-v1/conversations/f374cc0f-b558-5bfa-8bf4-48b7ecd2bafa"
+    },
+    {
+      "conversation_id": "1018db5c-1afb-5394-81eb-a4e14b985b03",
+      "turns": 1,
+      "total_cost_usd": null,
+      "spans": 8,
+      "operations": {
+        "chat": 4,
+        "execute_tool": 3,
+        "invoke_agent": 1
+      },
+      "error_spans": 0,
+      "url": "https://forge.coreweave.com/agent-lens/wandb/agentnerf-v1/conversations/1018db5c-1afb-5394-81eb-a4e14b985b03"
+    },
+    {
+      "conversation_id": "afa68c36-e81a-5fbd-b021-33cd41f26d27",
+      "turns": 2,
+      "total_cost_usd": null,
+      "spans": 16,
+      "operations": {
+        "chat": 7,
+        "execute_tool": 7,
+        "invoke_agent": 2
+      },
+      "error_spans": 0,
+      "url": "https://forge.coreweave.com/agent-lens/wandb/agentnerf-v1/conversations/afa68c36-e81a-5fbd-b021-33cd41f26d27"
+    }
+  ]
+}
