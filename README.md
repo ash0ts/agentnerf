@@ -67,7 +67,7 @@ One practical API quirk we hit while wiring OpenAI and Anthropic into the same r
 Requires Python 3.12+ and [`uv`](https://docs.astral.sh/uv/). Copy `.env.example` to `.env` and fill in `WANDB_API_KEY`, `OPENAI_API_KEY`, and `ANTHROPIC_API_KEY`.
 
 ```bash
-uv sync --extra dev
+uv sync --dev
 
 # 1. Run offline unit tests and verify the SHA-locked probe harness
 uv run pytest -q

@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
-      - run: uv sync --extra dev
+      - run: uv sync --dev
       - name: Run daily frozen panel + export traces to CoreWeave Agent Lens & Forge EvalTable
         run: |
           uv run agentnerf run \
