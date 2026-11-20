@@ -1,0 +1,146 @@
+{
+  "url": "http://127.0.0.1:8793/demo/index.html",
+  "slug": "agentnerf",
+  "label": "agentnerf · Agent Lens",
+  "serve": {
+    "command": "python3 -m http.server 8793 --bind 127.0.0.1",
+    "cwd": "..",
+    "ready_ms": 15000
+  },
+  "auth": {
+    "state": ".auth-forge.json",
+    "login_url": "https://forge.coreweave.com/agent-lens/wandb/agentnerf-v1/conversations",
+    "ready_url_includes": "/agent-lens/wandb/agentnerf-v1"
+  },
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "page_zoom": 1.12,
+  "accent": "#0541E9",
+  "ink": "#0F1222",
+  "snow": false,
+  "steps": [
+    {
+      "chapter": "agentnerf",
+      "kicker": "01",
+      "subtitle": "Daily multi-turn checks for OpenAI and Anthropic agents, traced in Agent Lens",
+      "lines": [
+        "Four deterministic tool-using probe families",
+        "Pure-Python graders, zero LLM judges",
+        "144 conversations across six frontier models"
+      ],
+      "tag": "Baseline",
+      "question": "Does the positive-control finding land cold in ten seconds?"
+    },
+    {
+      "caption": "Day-0 baseline across OpenAI and Anthropic.",
+      "ms": 1800
+    },
+    {
+      "still": "day0-baseline"
+    },
+    {
+      "click": "#btn-val",
+      "caption": "Switch to the effort-low positive control.",
+      "ms": 1200
+    },
+    {
+      "callout": "#row-gpt55-val",
+      "text": "On 16 paired items, <b>gpt-5.5</b> cuts reasoning tokens by <b>67.6%</b> on Day 1 while task score dips only 4.2 points.",
+      "caption": "Reasoning tokens drop before accuracy moves.",
+      "pad": 4,
+      "ms": 3400
+    },
+    {
+      "still": "positive-control"
+    },
+    {
+      "chapter": "Agent Lens",
+      "kicker": "02",
+      "when": "auth",
+      "subtitle": "Every multi-turn probe lands in CoreWeave Agent Lens with tool and error spans",
+      "tag": "",
+      "question": "Is the replica failover trace easy to follow?"
+    },
+    {
+      "goto": "https://forge.coreweave.com/agent-lens/wandb/agentnerf-v1/conversations",
+      "wait_until": "domcontentloaded",
+      "ms": 4500
+    },
+    {
+      "eval": "(()=>{const k=()=>{const e=document.getElementById('onetrust-consent-sdk');if(e)e.remove()};k();new MutationObserver(k).observe(document.documentElement,{childList:true,subtree:true})})()",
+      "optional": true
+    },
+    {
+      "caption": "144 traced runs. Red badges mark planted tool faults.",
+      "ms": 2400
+    },
+    {
+      "still": "agent-lens-conversations"
+    },
+    {
+      "goto": "https://forge.coreweave.com/agent-lens/wandb/agentnerf-v1/conversations/48cb238c-8d0e-57df-ba60-cdbf5d608372",
+      "wait_until": "domcontentloaded",
+      "ms": 4500
+    },
+    {
+      "eval": "(()=>{const k=()=>{const e=document.getElementById('onetrust-consent-sdk');if(e)e.remove()};k();new MutationObserver(k).observe(document.documentElement,{childList:true,subtree:true})})()",
+      "optional": true
+    },
+    {
+      "click": "role=tab[name=\"Spans\"]",
+      "caption": "Open Spans on a two-turn incident triage.",
+      "ms": 2000,
+      "optional": true
+    },
+    {
+      "click": "text=execute_tool query_telemetry >> nth=1",
+      "caption": "Primary timed out. The retry hit standby_west.",
+      "ms": 2600,
+      "optional": true
+    },
+    {
+      "still": "agent-lens-failover-span"
+    },
+    {
+      "chapter": "EvalTables",
+      "kicker": "03",
+      "when": "auth",
+      "subtitle": "Paired high-effort and low-effort runs linked side by side in Forge",
+      "tag": "",
+      "question": "Should daily runs alert on token shifts independently of score?"
+    },
+    {
+      "goto": "https://forge.coreweave.com/wandb/wandb/agentnerf-v1/runs/w79pmmym",
+      "wait_until": "domcontentloaded",
+      "ms": 6000
+    },
+    {
+      "eval": "(()=>{const o=document.getElementById('onetrust-consent-sdk');if(o)o.remove();for(const el of Array.from(document.querySelectorAll('div'))){if((el.textContent||'').trim().startsWith('Heads up: Scheduled maintenance')&&el.offsetHeight<80)el.remove()}})()",
+      "optional": true
+    },
+    {
+      "caption": "Each EvalTable row links both Agent Lens traces.",
+      "ms": 2800
+    },
+    {
+      "still": "forge-evaltable"
+    },
+    {
+      "outro": "agentnerf",
+      "kicker": "v1",
+      "subtitle": "Pure-Python daily drift probes for frontier agents, traced in CoreWeave Agent Lens",
+      "lines": [
+        "github.com/ash0ts/agentnerf",
+        "forge.coreweave.com/agent-lens/wandb/agentnerf-v1"
+      ],
+      "ms": 3000
+    }
+  ],
+  "chapter_pill": {
+    "top": "auto",
+    "bottom": "28px",
+    "left": "24px"
+  }
+}

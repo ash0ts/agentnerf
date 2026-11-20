@@ -4,6 +4,8 @@
 *.env
 !.env.example
 .panel_secret
+demo/.auth-*.json
+demo/.walkthrough-server.log
 
 # Python & tooling
 __pycache__/
